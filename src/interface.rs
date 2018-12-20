@@ -75,8 +75,8 @@ fn convert_ifaddrs (ifa: *mut ffi::ifaddrs) -> Option<Interface> {
     let kind = if ifa.ifa_addr != ptr::null_mut() {
         match unsafe { *ifa.ifa_addr }.sa_family as i32 {
             ffi::AF_PACKET => Kind::Packet,
-            socket::AF_INET => Kind::Ipv4,
-            socket::AF_INET6 => Kind::Ipv6,
+            libc::AF_INET => Kind::Ipv4,
+            libc::AF_INET6 => Kind::Ipv6,
             _ => return None,
         }
     } else {

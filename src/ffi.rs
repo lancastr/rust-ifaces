@@ -66,7 +66,7 @@ pub fn convert_sockaddr (sa: *mut socket::sockaddr) -> Option<SocketAddr> {
     if sa == ptr::null_mut() { return None; }
 
     match unsafe { *sa }.sa_family as i32 {
-        socket::AF_INET => {
+        libc::AF_INET => {
             let sa: *const socket::sockaddr_in = unsafe { mem::transmute(sa) };
             let sa = & unsafe { *sa };
             let addr: [u8; 4] = unsafe { mem::transmute(sa.sin_addr.s_addr) };
@@ -79,7 +79,7 @@ pub fn convert_sockaddr (sa: *mut socket::sockaddr) -> Option<SocketAddr> {
                 ), sa.sin_port
             )))
         },
-        socket::AF_INET6 => {
+        libc::AF_INET6 => {
             let sa: *const socket::sockaddr_in6 = unsafe { mem::transmute(sa) };
             let sa = & unsafe { *sa };
             let addr: [u16; 8] = unsafe { mem::transmute(sa.sin6_addr.s6_addr) };
