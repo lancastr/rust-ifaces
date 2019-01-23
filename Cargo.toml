@@ -15,5 +15,5 @@ readme = "README.md"
 license = "MIT"
 
 [dependencies]
-nix = "0.12"
+nix = "0.13"
 libc = "0.2"
